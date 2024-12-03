@@ -21,10 +21,10 @@
 , libiconv, postgresql, nodejs, clang, sqlite, zlib, imagemagick, lasem
 , pkg-config , ncurses, xapian, gpgme, util-linux, tzdata, icu, libffi
 , cmake, libssh2, openssl, openssl_1_1, libmysqlclient, git, perl, pcre2, gecode_3, curl
-, libsodium, snappy, libossp_uuid, lxc, libpcap, xorg, gtk3, lerc, buildRubyGem
+, libsodium, snappy, libossp_uuid, lxc, libpcap, xorg, gtk3, gtk4, lerc, buildRubyGem
 , cairo, expat, re2, rake, gobject-introspection, gdk-pixbuf, zeromq, czmq, graphicsmagick, libcxx
 , file, libvirt, glib, vips, taglib, libopus, linux-pam, libidn, protobuf, fribidi, harfbuzz
-, bison, flex, pango, python3, patchelf, binutils, freetds, wrapGAppsHook3, atk
+, bison, flex, pango, python3, patchelf, binutils, freetds, wrapGAppsHook3, wrapGAppsHook4, atk
 , bundler, libsass, dart-sass, libexif, libselinux, libsepol, shared-mime-info, libthai, libdatrie
 , CoreServices, DarwinTools, cctools, libtool, discount, exiv2, libepoxy, libxkbcommon, libmaxminddb, libyaml
 , cargo, rustc, rustPlatform, libsysprof-capture
@@ -248,6 +248,12 @@ in
     propagatedBuildInputs = [ gobject-introspection wrapGAppsHook3 gdk-pixbuf cairo ];
   };
 
+  gdk4 = attrs: {
+    nativeBuildInputs = [ pkg-config bundler rake ]
+      ++ lib.optionals stdenv.hostPlatform.isDarwin [ DarwinTools ];
+    propagatedBuildInputs = [ gobject-introspection wrapGAppsHook4 gdk-pixbuf cairo ];
+  };
+
   gpgme = attrs: {
     buildInputs = [ gpgme ];
     nativeBuildInputs = [ pkg-config ];
@@ -364,6 +370,37 @@ in
       fribidi
       gobject-introspection
       gtk3
+      cairo
+      harfbuzz
+      lerc
+      libdatrie
+      libsysprof-capture
+      libthai
+      pcre2
+      xorg.libpthreadstubs
+      xorg.libXdmcp
+      xorg.libXtst
+      libxkbcommon
+      libepoxy
+    ];
+    dontStrip = stdenv.hostPlatform.isDarwin;
+  };
+
+  gtk4 = attrs: {
+    nativeBuildInputs = [
+      binutils
+      pkg-config
+    ] ++ lib.optionals stdenv.hostPlatform.isLinux [
+      util-linux
+      libselinux
+      libsepol
+    ] ++ lib.optionals stdenv.hostPlatform.isDarwin [ DarwinTools ];
+    propagatedBuildInputs = [
+      atk
+      gdk-pixbuf
+      fribidi
+      gobject-introspection
+      gtk4
       cairo
       harfbuzz
       lerc
