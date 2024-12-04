@@ -131,6 +131,17 @@
     };
     version = "2.8.6";
   };
+  adwaita = {
+    dependencies = ["gtk4"];
+    groups = ["default"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "f2418f542f6d277afeac0f142ee5c9de8fdf65acab5b1b6aa00562626940fd60";
+      type = "gem";
+    };
+    version = "4.2.1";
+  };
   ansi = {
     groups = ["default"];
     platforms = [];
