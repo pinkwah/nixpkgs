@@ -789,6 +789,17 @@
     };
     version = "3.3.4";
   };
+  debug = {
+    dependencies = ["irb" "reline"];
+    groups = [];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "48e026c0852c7a10c60263e2e527968308958e266231e36d64e3efcabec7e7fc";
+      type = "gem";
+    };
+    version = "1.9.2";
+  };
   dentaku = {
     dependencies = ["concurrent-ruby"];
     groups = ["default"];
